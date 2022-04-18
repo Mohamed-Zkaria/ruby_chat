@@ -10,6 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20220417193142) do
 
+  create_table "applications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string   "token"
+    t.string   "name"
+    t.integer  "chats_count"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["token"], name: "index_applications_on_token", unique: true, using: :btree
+  end
+
+  create_table "chats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string   "application_token"
+    t.integer  "chat_number"
+    t.integer  "messages_count"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["application_token", "chat_number"], name: "index_chats_on_application_token_and_chat_number", unique: true, using: :btree
+  end
+
+  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer  "chat_number"
+    t.integer  "message_number"
+    t.text     "body",           limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["chat_number", "message_number"], name: "index_messages_on_chat_number_and_message_number", unique: true, using: :btree
+  end
+
+  add_foreign_key "chats", "applications", column: "application_token", primary_key: "token"
 end
