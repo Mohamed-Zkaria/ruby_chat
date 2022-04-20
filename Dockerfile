@@ -21,13 +21,3 @@ COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
-# docker-compose run web bundle install
-# docker compose up
-# docker-compose run web rails generate model Application token:string name:string chats_count:integer
-
-
-
-
-# Application tokens
-# GDEk1TkjE04imdngeS6IkA
-# L-v2QPh1pXLTsmb3D2GFzQ
