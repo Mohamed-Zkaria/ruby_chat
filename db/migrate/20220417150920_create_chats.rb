@@ -4,6 +4,7 @@ class CreateChats < ActiveRecord::Migration[5.0]
       t.string :application_token
       t.integer :chat_number
       t.integer :messages_count
+      t.references :application, null: false, foreign_key: true
 
       t.timestamps
     end

@@ -25,8 +25,10 @@ ActiveRecord::Schema.define(version: 20220417193142) do
     t.string   "application_token"
     t.integer  "chat_number"
     t.integer  "messages_count"
+    t.integer  "application_id",    null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.index ["application_id"], name: "index_chats_on_application_id", using: :btree
     t.index ["application_token", "chat_number"], name: "index_chats_on_application_token_and_chat_number", unique: true, using: :btree
   end
 
@@ -34,10 +36,13 @@ ActiveRecord::Schema.define(version: 20220417193142) do
     t.integer  "chat_number"
     t.integer  "message_number"
     t.text     "body",           limit: 65535
+    t.integer  "chat_id",                      null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id", using: :btree
     t.index ["chat_number", "message_number"], name: "index_messages_on_chat_number_and_message_number", unique: true, using: :btree
   end
 
-  add_foreign_key "chats", "applications", column: "application_token", primary_key: "token"
+  add_foreign_key "chats", "applications"
+  add_foreign_key "messages", "chats"
 end
