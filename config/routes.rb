@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  # resources :applications do
-  #   resources :chats do
-  #     resources :messages
-  #   end
-  # end
 
   get "/applications", to: "applications#index"
   get "/applications/:token", to: "applications#show"
@@ -19,5 +13,12 @@ Rails.application.routes.draw do
   patch "/applications/:application_token/chats/:chat_number", to: "chats#update"
   put "/applications/:application_token/chats/:chat_number", to: "chats#update"
   delete "/applications/:application_token/chats/:chat_number", to: "chats#destroy"
+
+  get "/applications/:application_token/chats/messages", to: "messages#index"
+  get "/applications/:application_token/chats/:chat_number/messages/:message_number", to: "messages#show"
+  post "/applications/:application_token/chats/messages", to: "messages#create"
+  patch "/applications/:application_token/chats/:chat_number/messages/:message_number", to: "messages#update"
+  put "/applications/:application_token/chats/:chat_number/messages/:message_number", to: "messages#update"
+  delete "/applications/:application_token/chats/:chat_number/messages/:message_number", to: "messages#destroy"
   
 end
