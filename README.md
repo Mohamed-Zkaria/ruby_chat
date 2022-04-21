@@ -1,5 +1,8 @@
 # ruby_chat
 Simple Ruby api to handle three different entities. 
+- Application
+- Chat
+- Messages
 
 ## How to install
 

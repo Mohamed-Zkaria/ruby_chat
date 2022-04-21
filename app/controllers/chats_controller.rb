@@ -39,7 +39,25 @@ class ChatsController < ApplicationController
     end
 
     def update
+        application_token = params[:application_token]
+        new_application_token = params[:new_application_token]
+        chat_number = params[:chat_number]
+        new_chat_number = params[:new_chat_number]
+        messages_count = params[:messages_count]
 
+        return render json {message: "All fields are empty"}, status: :unprocessable_entity if application_token.nil?
+        return render json {message: "All fields are empty"}, status: :unprocessable_entity if chat_number
+        application = Application.find_by(token: application_token)
+        chat = application.chats.where(chat_number: chat_number)
+
+        chat.application_token = new_application_token unless new_application_token.nil?
+        chat.messages_count = messages_count unless messages_count.nil?
+        if chat.chat_number != chat_number && !Chat.exists?(application_token: application.token, chat_number: chats_count)
+            chat.chat_number = new_chat_number
+        end
+        chat.save
+
+        return render json: chat.to_json(except: :id)
     end
 
     def destroy

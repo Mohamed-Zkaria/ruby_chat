@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get "/applications/:application_token/chats/:chat_number", to: "chats#show"
   post "/applications/:application_token/chats/", to: "chats#create"
   patch "/applications/:application_token/chats/:chat_number", to: "chats#update"
-  put "/applications/:application_token/chats/chat_number", to: "chats#update"
+  put "/applications/:application_token/chats/:chat_number", to: "chats#update"
   delete "/applications/:application_token/chats/:chat_number", to: "chats#destroy"
   
 end
