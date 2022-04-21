@@ -45,8 +45,8 @@ class ChatsController < ApplicationController
         new_chat_number = params[:new_chat_number]
         messages_count = params[:messages_count]
 
-        return render json {message: "All fields are empty"}, status: :unprocessable_entity if application_token.nil?
-        return render json {message: "All fields are empty"}, status: :unprocessable_entity if chat_number
+        return render json: {message: "All fields are empty"}, status: :unprocessable_entity if application_token.nil?
+        return render json: {message: "All fields are empty"}, status: :unprocessable_entity if chat_number
         application = Application.find_by(token: application_token)
         chat = application.chats.where(chat_number: chat_number)
 
